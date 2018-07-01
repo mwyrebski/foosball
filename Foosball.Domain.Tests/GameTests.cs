@@ -68,6 +68,23 @@ namespace Foosball.Domain.Tests
             _game.Sets.Should().HaveCount(3);
         }
 
+        [Theory]
+        [InlineData(1, 0)]
+        [InlineData(0, 1)]
+        [InlineData(5, 5)]
+        [InlineData(9, 1)]
+        [InlineData(1, 9)]
+        [InlineData(7, 7)]
+        [InlineData(9, 9)]
+        public void AddGoal_EachTeamScoresLessThan10Goals_ShouldNotCreate2ndSet(int goalsA, int goalsB)
+        {
+            AddGoals(goalsA, Team.TeamA);
+            AddGoals(goalsB, Team.TeamB);
+
+            _game.Sets.Should().HaveCount(1);
+        }
+
+
         private void AddGoals(int numberOfGoals, Team team)
         {
             for (int i = 0; i < numberOfGoals; i++)
