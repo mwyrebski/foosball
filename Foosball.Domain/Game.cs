@@ -16,6 +16,9 @@ namespace Foosball.Domain
 
         public void AddGoal(Team team)
         {
+            if (Status == GameStatus.Finished)
+                throw new CannotAddGoalToFinishedGameException();
+
             if (!Sets.Any())
                 Sets.Add(new Set());
 
