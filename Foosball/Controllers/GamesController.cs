@@ -11,6 +11,13 @@ namespace Foosball.Controllers
     [Route("api/[controller]")]
     public class GamesController : Controller
     {
+        private readonly IGameRepository _gameRepository;
+
+        public GamesController(IGameRepository gameRepository)
+        {
+            _gameRepository = gameRepository;
+        }
+
         // GET api/values
         [HttpGet]
         public IEnumerable<Game> Get()
