@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Foosball.Domain.Exceptions;
 
@@ -8,11 +9,16 @@ namespace Foosball.Domain
     {
         public int GameId { get; set; }
 
+        public DateTime Started { get; set; }
+
         public IList<Set> Sets { get; set; } = new List<Set>();
 
         public static Game Create()
         {
-            return new Game();
+            return new Game
+            {
+                Started = DateTime.UtcNow
+            };
         }
 
         public void AddGoal(Team team)
