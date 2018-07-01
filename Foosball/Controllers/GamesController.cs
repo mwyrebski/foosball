@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Foosball.Controllers
 {
     [Route("api/[controller]")]
-    public class ValuesController : Controller
+    public class GamesController : Controller
     {
         // GET api/values
         [HttpGet]
