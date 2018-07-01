@@ -22,12 +22,12 @@ namespace Foosball.Infrastructure.Persistence
                 .SingleOrDefault(game => game.GameId == id);
         }
 
-        public ICollection<Game> GetAll()
+        public IEnumerable<Game> GetAll()
         {
             return _dbContext.Games
                 .Include(x => x.Sets)
                 .ThenInclude(x => x.Goals)
-                .ToList();
+                .OrderByDescending(x => x.Started);
         }
 
         public void Save(Game game)
