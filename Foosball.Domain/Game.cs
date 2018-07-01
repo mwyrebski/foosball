@@ -48,6 +48,8 @@ namespace Foosball.Domain
         {
             get
             {
+                if (WonByTeam.HasValue)
+                    return GameStatus.Finished;
                 if (Sets.Any())
                     return GameStatus.InProgress;
                 return GameStatus.NotStarted;
@@ -58,7 +60,8 @@ namespace Foosball.Domain
     public enum GameStatus
     {
         NotStarted,
-        InProgress
+        InProgress,
+        Finished
     }
 
     public enum Team
