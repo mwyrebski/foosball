@@ -43,6 +43,16 @@ namespace Foosball.Domain
                 return null;
             }
         }
+
+        public GameStatus Status
+        {
+            get { return GameStatus.NotStarted; }
+        }
+    }
+
+    public enum GameStatus
+    {
+        NotStarted
     }
 
     public enum Team
