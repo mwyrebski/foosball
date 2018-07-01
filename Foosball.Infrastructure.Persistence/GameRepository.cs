@@ -13,6 +13,11 @@ namespace Foosball.Infrastructure.Persistence
             _dbContext = dbContext;
         }
 
+        public Game FindById(int id)
+        {
+            return _dbContext.Games.Find(id);
+        }
+
         public ICollection<Game> GetAll()
         {
             return _dbContext.Games.ToList();

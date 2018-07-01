@@ -22,14 +22,14 @@ namespace Foosball.Controllers
         [HttpGet]
         public IEnumerable<Game> Get()
         {
-            return new[] {Game.Create(), Game.Create()};
+            return _gameRepository.GetAll();
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
         public Game Get(int id)
         {
-            return Game.Create();
+            return _gameRepository.FindById(id);
         }
 
         // POST api/values
