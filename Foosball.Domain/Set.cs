@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Foosball.Domain
@@ -7,7 +8,17 @@ namespace Foosball.Domain
     {
         public int SetId { get; set; }
 
+        public DateTime CreatedAt { get; set; }
+
         public IList<Goal> Goals { get; set; } = new List<Goal>();
+
+        public static Set Create()
+        {
+            return new Set
+            {
+                CreatedAt = DateTime.UtcNow
+            };
+        }
 
         public Team? WonByTeam
         {

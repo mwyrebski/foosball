@@ -29,7 +29,7 @@ namespace Foosball.Infrastructure.Persistence
             return _dbContext.Games
                 .Include(x => x.Sets)
                 .ThenInclude(x => x.Goals)
-                .OrderByDescending(x => x.Started);
+                .OrderByDescending(x => x.StartedAt);
         }
 
         public async Task SaveAsync(Game game, CancellationToken cancellationToken)

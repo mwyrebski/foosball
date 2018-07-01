@@ -9,7 +9,7 @@ namespace Foosball.Domain
     {
         public int GameId { get; set; }
 
-        public DateTime Started { get; set; }
+        public DateTime StartedAt { get; set; }
 
         public IList<Set> Sets { get; set; } = new List<Set>();
 
@@ -17,7 +17,7 @@ namespace Foosball.Domain
         {
             return new Game
             {
-                Started = DateTime.UtcNow
+                StartedAt = DateTime.UtcNow
             };
         }
 
@@ -27,16 +27,16 @@ namespace Foosball.Domain
                 throw new CannotAddGoalToFinishedGameException();
 
             if (!Sets.Any())
-                Sets.Add(new Set());
+                Sets.Add(Set.Create());
 
             Set currentSet = Sets.Last();
             if (currentSet.WonByTeam.HasValue)
             {
-                currentSet = new Set();
+                currentSet = Set.Create();
                 Sets.Add(currentSet);
             }
 
-            currentSet.Goals.Add(new Goal(team));
+            currentSet.Goals.Add(Goal.Create(team));
         }
 
         public Team? WonByTeam
