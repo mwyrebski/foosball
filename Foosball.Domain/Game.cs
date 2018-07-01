@@ -39,20 +39,9 @@ namespace Foosball.Domain
             currentSet.Goals.Add(Goal.Create(team));
         }
 
-        public Team? WonByTeam
-        {
-            get
-            {
-                int setsWonByA = Sets.Count(set => set.WonByTeam == Team.TeamA);
-                int setsWonByB = Sets.Count(set => set.WonByTeam == Team.TeamB);
-
-                if (setsWonByA == 2)
-                    return Team.TeamA;
-                if (setsWonByB == 2)
-                    return Team.TeamB;
-                return null;
-            }
-        }
+        public Team? WonByTeam => Sets
+            .ToLookup(x => x.WonByTeam)
+            .SingleOrDefault(x => x.Count() == 2)?.Key;
 
         public GameStatus Status
         {
