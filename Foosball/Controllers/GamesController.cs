@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using Foosball.Domain;
 using Microsoft.AspNetCore.Mvc;
@@ -22,31 +23,31 @@ namespace Foosball.Controllers
         }
 
         [HttpGet("{id}")]
-        public Task<Game> Get(int id)
+        public Task<Game> Get(int id, CancellationToken cancellationToken)
         {
-            return _gameRepository.FindByIdAsync(id);
+            return _gameRepository.FindByIdAsync(id, cancellationToken);
         }
 
         [HttpPost]
-        public IActionResult Post()
+        public async Task<IActionResult> Post(CancellationToken cancellationToken)
         {
             Game game = Game.Create();
 
-            _gameRepository.SaveAsync(game);
+            await _gameRepository.SaveAsync(game, cancellationToken);
 
             return CreatedAtAction(nameof(Get), new {id = game.GameId}, game);
         }
 
         [HttpPost("{id}/goal/{team}")]
-        public async Task<IActionResult> Post(int id, Team team)
+        public async Task<IActionResult> Post(int id, Team team, CancellationToken cancellationToken)
         {
-            Game game = await _gameRepository.FindByIdAsync(id);
+            Game game = await _gameRepository.FindByIdAsync(id, cancellationToken);
             if (game == null)
                 return NotFound();
 
             game.AddGoal(team);
 
-            await _gameRepository.SaveAsync(game);
+            await _gameRepository.SaveAsync(game, cancellationToken);
             return Ok(game);
         }
     }
