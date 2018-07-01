@@ -7,20 +7,23 @@ namespace Foosball.Domain.Tests
 {
     public class GameTests
     {
+        private readonly Game _game;
+
+        public GameTests()
+        {
+            _game = Game.Create();
+        }
+
         [Fact]
         public void Create_ShouldPassAndReturnNotNull()
         {
-            var game = Game.Create();
-
-            game.Should().NotBeNull();
+            _game.Should().NotBeNull();
         }
 
         [Fact]
         public void Create_ShouldCreateGameWithEmptySets()
         {
-            var game = Game.Create();
-
-            game.Sets.Should().BeEmpty();
+            _game.Sets.Should().BeEmpty();
         }
 
         [Theory]
@@ -28,9 +31,7 @@ namespace Foosball.Domain.Tests
         [InlineData(Team.TeamB)]
         public void AddGoal_ShouldPassForBothTeams(Team team)
         {
-            var game = Game.Create();
-
-            game.AddGoal(team);
+            _game.AddGoal(team);
         }
     }
 }
