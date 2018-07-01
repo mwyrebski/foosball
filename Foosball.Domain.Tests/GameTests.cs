@@ -45,6 +45,8 @@ namespace Foosball.Domain.Tests
         [Fact]
         public void AddGoal_GameShouldHaveInProgressStatus()
         {
+            _game.AddGoal(Team.TeamA);
+
             _game.Status.Should().Be(GameStatus.InProgress);
         }
 

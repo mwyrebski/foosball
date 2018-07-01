@@ -46,13 +46,19 @@ namespace Foosball.Domain
 
         public GameStatus Status
         {
-            get { return GameStatus.NotStarted; }
+            get
+            {
+                if (Sets.Any())
+                    return GameStatus.InProgress;
+                return GameStatus.NotStarted;
+            }
         }
     }
 
     public enum GameStatus
     {
-        NotStarted
+        NotStarted,
+        InProgress
     }
 
     public enum Team
