@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Foosball.Domain
 {
@@ -57,48 +55,6 @@ namespace Foosball.Domain
                     return GameStatus.InProgress;
                 return GameStatus.NotStarted;
             }
-        }
-    }
-
-    public enum GameStatus
-    {
-        NotStarted,
-        InProgress,
-        Finished
-    }
-
-    public enum Team
-    {
-        TeamA,
-        TeamB
-    }
-
-    public class Set
-    {
-        public IList<Goal> Goals { get; set; } = new List<Goal>();
-
-        public Team? WonByTeam
-        {
-            get
-            {
-                int goalsA = Goals.Count(goal => goal.Team == Team.TeamA);
-                if (goalsA == 10)
-                    return Team.TeamA;
-                int goalsB = Goals.Count(goal => goal.Team == Team.TeamB);
-                if (goalsB == 10)
-                    return Team.TeamB;
-                return null;
-            }
-        }
-    }
-
-    public class Goal
-    {
-        public Team Team { get; set; }
-
-        public Goal(Team team)
-        {
-            Team = team;
         }
     }
 }
