@@ -33,5 +33,13 @@ namespace Foosball.Domain.Tests
         {
             _game.AddGoal(team);
         }
+
+        [Fact]
+        public void AddGoal_ShouldCreateNewSet()
+        {
+            _game.AddGoal(Team.TeamA);
+
+            _game.Sets.Should().HaveCount(1);
+        }
     }
 }
