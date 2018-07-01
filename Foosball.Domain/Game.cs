@@ -7,7 +7,6 @@ namespace Foosball.Domain
 {
     public class Game
     {
-        private int _goals;
         public IList<Set> Sets { get; set; } = new List<Set>();
 
         public static Game Create()
@@ -30,8 +29,6 @@ namespace Foosball.Domain
             }
 
             currentSet.Goals.Add(new Goal(team));
-
-            _goals++;
         }
     }
 
