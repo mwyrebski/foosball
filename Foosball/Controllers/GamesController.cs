@@ -23,9 +23,12 @@ namespace Foosball.Controllers
         }
 
         [HttpGet("{id}")]
-        public Task<Game> GetByIdAsync(int id, CancellationToken cancellationToken)
+        public async Task<IActionResult> GetByIdAsync(int id, CancellationToken cancellationToken)
         {
-            return _gameRepository.FindByIdAsync(id, cancellationToken);
+            Game game = await _gameRepository.FindByIdAsync(id, cancellationToken);
+            if (game == null)
+                return NotFound();
+            return Ok(game);
         }
 
         [HttpPost]
