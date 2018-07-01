@@ -17,12 +17,6 @@ namespace Foosball.Domain.Tests
         }
 
         [Fact]
-        public void Create_ShouldPassAndReturnNotNull()
-        {
-            _game.Should().NotBeNull();
-        }
-
-        [Fact]
         public void Create_ShouldCreateGameWithEmptySets()
         {
             _game.Sets.Should().BeEmpty();
