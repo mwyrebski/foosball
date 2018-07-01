@@ -115,14 +115,10 @@ namespace Foosball.Domain.Tests
         }
 
         [Theory]
-        [InlineData(Team.TeamA, 10, 0, Team.TeamA)]
         [InlineData(Team.TeamB, 10, 0, Team.TeamA)]
-        [InlineData(Team.TeamA, 10, 9, Team.TeamA)]
         [InlineData(Team.TeamB, 10, 9, Team.TeamA)]
         [InlineData(Team.TeamA, 0, 10, Team.TeamB)]
-        [InlineData(Team.TeamB, 0, 10, Team.TeamB)]
         [InlineData(Team.TeamA, 9, 10, Team.TeamB)]
-        [InlineData(Team.TeamB, 9, 10, Team.TeamB)]
         public void AddGoal_TeamScores10GoalsIn2ndSet_ScoringTeamOf2ndSetShouldWin2stSet(
             Team teamWinning1StSet, int goalsAset2, int goalsBset2, Team expectedWinningTeamOf2NdSet)
         {
