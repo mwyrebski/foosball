@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Foosball.Domain;
 using Foosball.Infrastructure.Persistence;
+using Foosball.Middlewares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -42,7 +43,9 @@ namespace Foosball
             {
                 app.UseDeveloperExceptionPage();
             }
-            
+
+            app.UseMiddleware<FoosballExceptionHandlingMiddleware>();
+
             app.UseMvc();
         }
     }

@@ -1,8 +1,6 @@
-﻿using System;
-
-namespace Foosball.Domain
+﻿namespace Foosball.Domain.Exceptions
 {
-    public class CannotAddGoalToFinishedGameException : Exception
+    public sealed class CannotAddGoalToFinishedGameException : FoosballInvalidDataException
     {
         public CannotAddGoalToFinishedGameException()
             : base("Cannot add goal to a Finished game")
