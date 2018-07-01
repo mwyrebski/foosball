@@ -1,6 +1,6 @@
 # Foosball
 
-Simple API for tracking game stats for three-set Foosball games.
+Simple web service with API for tracking game stats for three-set Foosball games.
 
 ## Domain
 
@@ -25,3 +25,10 @@ Basic assumptions:
   - `NotStarted` - when a `Game` is newly created and until first goal is shot
   - `InProgress` - after first shot and until `Game` is `Finished`
   - `Finished` - when any of teams win whole `Game`
+
+## Persistence
+
+Foosball web service uses Sqlite as a persistence mechanism.
+
+The connection string can be configured in the `appsettings.json` file.
+By default data will be stored in `Foosball.db`.
