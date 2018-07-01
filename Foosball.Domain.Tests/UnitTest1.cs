@@ -22,5 +22,15 @@ namespace Foosball.Domain.Tests
 
             game.Sets.Should().BeEmpty();
         }
+
+        [Theory]
+        [InlineData(Team.TeamA)]
+        [InlineData(Team.TeamB)]
+        public void AddGoal_ShouldPassForBothTeams(Team team)
+        {
+            var game = Game.Create();
+
+            game.AddGoal(team);
+        }
     }
 }
