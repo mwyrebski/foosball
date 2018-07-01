@@ -12,6 +12,16 @@ namespace Foosball.Domain
         {
             return new Game();
         }
+
+        public void AddGoal(Team team)
+        {
+        }
+    }
+
+    public enum Team
+    {
+        TeamA,
+        TeamB
     }
 
     public class Set
