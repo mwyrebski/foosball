@@ -15,7 +15,7 @@ namespace Foosball.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Game> Get()
+        public IEnumerable<Game> GetAll()
         {
             return _gameRepository.GetAll();
         }
@@ -24,6 +24,16 @@ namespace Foosball.Controllers
         public Game Get(int id)
         {
             return _gameRepository.FindById(id);
+        }
+
+        [HttpPost]
+        public IActionResult Post()
+        {
+            Game game = Game.Create();
+
+            _gameRepository.Save(game);
+
+            return CreatedAtAction(nameof(Get), new {id = game.GameId}, game);
         }
 
         [HttpPost("{id}/goal/{team}")]
