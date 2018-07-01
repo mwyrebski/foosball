@@ -52,5 +52,18 @@ namespace Foosball.Domain.Tests
 
             _game.Sets.Should().HaveCount(2);
         }
+
+        [Theory]
+        [InlineData(Team.TeamA)]
+        [InlineData(Team.TeamB)]
+        public void AddGoal_10TimesForTheSameTeam_ShouldNotCreate2ndSet(Team team)
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                _game.AddGoal(team);
+            }
+
+            _game.Sets.Should().HaveCount(1);
+        }
     }
 }
