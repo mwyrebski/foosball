@@ -20,9 +20,7 @@ namespace Foosball.Domain
                 Sets.Add(new Set());
 
             Set currentSet = Sets.Last();
-            int goalsA = currentSet.Goals.Count(goal => goal.Team == Team.TeamA);
-            int goalsB = currentSet.Goals.Count(goal => goal.Team == Team.TeamB);
-            if (goalsA == 10 || goalsB == 10)
+            if (currentSet.WonByTeam.HasValue)
             {
                 currentSet = new Set();
                 Sets.Add(currentSet);
