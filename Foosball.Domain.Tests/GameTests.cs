@@ -5,7 +5,7 @@ using Xunit;
 
 namespace Foosball.Domain.Tests
 {
-    public class UnitTest1
+    public class GameTests
     {
         [Fact]
         public void Create_ShouldPassAndReturnNotNull()
