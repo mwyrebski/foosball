@@ -169,6 +169,17 @@ namespace Foosball.Domain.Tests
             _game.Status.Should().Be(GameStatus.Finished);
         }
 
+        [Fact]
+        public void AddGoal_WhenGameHasFinishedStatus_ShouldThrowCannotAddGoalToFinishedGameException()
+        {
+            AddGoals(10, Team.TeamB);
+            AddGoals(10, Team.TeamB);
+
+            Action action = () => _game.AddGoal(Team.TeamA);
+
+            action.Should().Throw<CannotAddGoalToFinishedGameException>();
+        }
+
         private void AddGoals(int numberOfGoals, Team team)
         {
             for (int i = 0; i < numberOfGoals; i++)
