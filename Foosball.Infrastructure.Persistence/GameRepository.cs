@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Foosball.Domain;
+using Microsoft.EntityFrameworkCore;
 
 namespace Foosball.Infrastructure.Persistence
 {
@@ -15,12 +16,18 @@ namespace Foosball.Infrastructure.Persistence
 
         public Game FindById(int id)
         {
-            return _dbContext.Games.Find(id);
+            return _dbContext.Games
+                .Include(x => x.Sets)
+                .ThenInclude(x => x.Goals)
+                .SingleOrDefault(game => game.GameId == id);
         }
 
         public ICollection<Game> GetAll()
         {
-            return _dbContext.Games.ToList();
+            return _dbContext.Games
+                .Include(x => x.Sets)
+                .ThenInclude(x => x.Goals)
+                .ToList();
         }
 
         public void Save(Game game)

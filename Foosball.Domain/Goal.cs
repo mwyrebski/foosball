@@ -6,6 +6,10 @@
 
         public Team Team { get; set; }
 
+        public Goal()
+        {
+        }
+
         public Goal(Team team)
         {
             Team = team;
