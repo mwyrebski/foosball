@@ -16,7 +16,7 @@ namespace Foosball.Domain
 
         public void AddGoal(Team team)
         {
-            if (_goals == 0 || _goals == 10)
+            if (_goals == 0 || _goals == 10 || _goals == 20)
                 Sets.Add(new Set());
 
             _goals++;
