@@ -79,7 +79,8 @@ namespace Foosball.Domain.Tests
         [Fact]
         public void AddGoal_21Times_ShouldCreate3rdSet()
         {
-            AddGoals(21, Team.TeamA);
+            AddGoals(10, Team.TeamA);
+            AddGoals(11, Team.TeamB);
 
             _game.Sets.Should().HaveCount(3);
         }
