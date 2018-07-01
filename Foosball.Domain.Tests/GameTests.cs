@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 using Xunit;
+using Xunit.Sdk;
 
 namespace Foosball.Domain.Tests
 {
@@ -25,6 +26,12 @@ namespace Foosball.Domain.Tests
         public void Create_ShouldCreateGameWithEmptySets()
         {
             _game.Sets.Should().BeEmpty();
+        }
+
+        [Fact]
+        public void Create_GameShouldHaveStatusNotStarted()
+        {
+            _game.Status.Should().Be(GameStatus.NotStarted);
         }
 
         [Theory]
