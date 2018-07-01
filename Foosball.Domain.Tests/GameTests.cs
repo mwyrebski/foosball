@@ -41,5 +41,16 @@ namespace Foosball.Domain.Tests
 
             _game.Sets.Should().HaveCount(1);
         }
+
+        [Fact]
+        public void AddGoal_11Times_ShouldCreate2ndSet()
+        {
+            for (int i = 0; i < 11; i++)
+            {
+                _game.AddGoal(Team.TeamA);
+            }
+
+            _game.Sets.Should().HaveCount(2);
+        }
     }
 }
