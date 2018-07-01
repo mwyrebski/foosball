@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Foosball.Domain;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Foosball.Controllers
@@ -12,16 +13,16 @@ namespace Foosball.Controllers
     {
         // GET api/values
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<Game> Get()
         {
-            return new string[] { "value1", "value2" };
+            return new[] {Game.Create(), Game.Create()};
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public Game Get(int id)
         {
-            return "value";
+            return Game.Create();
         }
 
         // POST api/values
