@@ -1,9 +1,12 @@
-﻿using Foosball.Domain;
+﻿using System.IO;
+using Foosball.Domain;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.Extensions.Configuration;
 
 namespace Foosball.Infrastructure.Persistence
 {
-    public class FoosballDbContext : DbContext
+    public class FoosballDbContext : DbContext, IDesignTimeDbContextFactory<FoosballDbContext>
     {
         public FoosballDbContext()
         {
@@ -13,9 +16,20 @@ namespace Foosball.Infrastructure.Persistence
         {
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public FoosballDbContext CreateDbContext(string[] args)
         {
-            optionsBuilder.UseSqlite("Data Source=Foosball.configure.db");
+            string basePath = Path.Combine(Directory.GetCurrentDirectory(), "..", "Foosball");
+            Directory.SetCurrentDirectory(basePath);
+
+            IConfigurationRoot configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json")
+                .Build();
+
+            var builder = new DbContextOptionsBuilder<FoosballDbContext>();
+            builder.UseSqlite(configuration.GetConnectionString("FoosballDatabase"));
+            return new FoosballDbContext(builder.Options);
+
         }
 
         public DbSet<Game> Games { get; set; }
