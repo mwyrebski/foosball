@@ -33,9 +33,14 @@ namespace Foosball.Controllers
         }
 
         // POST api/values
-        [HttpPost]
-        public void Post([FromBody]string value)
+        [HttpPost("{id}/goal/{team}")]
+        public void Post(int id, Team team)
         {
+            Game game = _gameRepository.FindById(id);
+
+            game.AddGoal(team);
+
+            _gameRepository.Save(game);
         }
 
         // PUT api/values/5
