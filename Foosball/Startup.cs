@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Foosball.Domain;
 using Foosball.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -29,6 +30,8 @@ namespace Foosball
                 options.UseInMemoryDatabase("Foosball.db")
             );
 
+            services.AddScoped<IGameRepository, GameRepository>();
+
             services.AddMvc();
         }
 
@@ -39,7 +42,7 @@ namespace Foosball
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            
             app.UseMvc();
         }
     }
