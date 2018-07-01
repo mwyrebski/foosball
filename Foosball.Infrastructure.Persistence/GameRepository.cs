@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Foosball.Domain;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,12 +15,12 @@ namespace Foosball.Infrastructure.Persistence
             _dbContext = dbContext;
         }
 
-        public Game FindById(int id)
+        public Task<Game> FindByIdAsync(int id)
         {
             return _dbContext.Games
                 .Include(x => x.Sets)
                 .ThenInclude(x => x.Goals)
-                .SingleOrDefault(game => game.GameId == id);
+                .SingleOrDefaultAsync(game => game.GameId == id);
         }
 
         public IEnumerable<Game> GetAll()
@@ -30,13 +31,13 @@ namespace Foosball.Infrastructure.Persistence
                 .OrderByDescending(x => x.Started);
         }
 
-        public void Save(Game game)
+        public async Task SaveAsync(Game game)
         {
             if (game.GameId == 0)
-                _dbContext.Add(game);
+                await _dbContext.AddAsync(game);
             else
                 _dbContext.Update(game);
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
         }
     }
 }

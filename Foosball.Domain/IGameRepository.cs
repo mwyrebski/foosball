@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Foosball.Domain
 {
     public interface IGameRepository
     {
-        Game FindById(int id);
+        Task<Game> FindByIdAsync(int id);
         IEnumerable<Game> GetAll();
-        void Save(Game game);
+        Task SaveAsync(Game game);
     }
 }

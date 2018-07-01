@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Foosball.Domain;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,9 +22,9 @@ namespace Foosball.Controllers
         }
 
         [HttpGet("{id}")]
-        public Game Get(int id)
+        public Task<Game> Get(int id)
         {
-            return _gameRepository.FindById(id);
+            return _gameRepository.FindByIdAsync(id);
         }
 
         [HttpPost]
@@ -31,21 +32,21 @@ namespace Foosball.Controllers
         {
             Game game = Game.Create();
 
-            _gameRepository.Save(game);
+            _gameRepository.SaveAsync(game);
 
             return CreatedAtAction(nameof(Get), new {id = game.GameId}, game);
         }
 
         [HttpPost("{id}/goal/{team}")]
-        public IActionResult Post(int id, Team team)
+        public async Task<IActionResult> Post(int id, Team team)
         {
-            Game game = _gameRepository.FindById(id);
+            Game game = await _gameRepository.FindByIdAsync(id);
             if (game == null)
                 return NotFound();
 
             game.AddGoal(team);
 
-            _gameRepository.Save(game);
+            await _gameRepository.SaveAsync(game);
             return Ok(game);
         }
     }
