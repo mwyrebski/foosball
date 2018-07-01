@@ -5,6 +5,8 @@ namespace Foosball.Domain
 {
     public class Game
     {
+        public int GameId { get; set; }
+
         public IList<Set> Sets { get; set; } = new List<Set>();
 
         public static Game Create()

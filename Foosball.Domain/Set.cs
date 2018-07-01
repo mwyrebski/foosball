@@ -5,6 +5,8 @@ namespace Foosball.Domain
 {
     public class Set
     {
+        public int SetId { get; set; }
+
         public IList<Goal> Goals { get; set; } = new List<Goal>();
 
         public Team? WonByTeam
