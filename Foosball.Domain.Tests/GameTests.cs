@@ -45,10 +45,7 @@ namespace Foosball.Domain.Tests
         [Fact]
         public void AddGoal_11Times_ShouldCreate2ndSet()
         {
-            for (int i = 0; i < 11; i++)
-            {
-                _game.AddGoal(Team.TeamA);
-            }
+            AddGoals(11, Team.TeamA);
 
             _game.Sets.Should().HaveCount(2);
         }
@@ -58,10 +55,7 @@ namespace Foosball.Domain.Tests
         [InlineData(Team.TeamB)]
         public void AddGoal_10TimesForTheSameTeam_ShouldNotCreate2ndSet(Team team)
         {
-            for (int i = 0; i < 10; i++)
-            {
-                _game.AddGoal(team);
-            }
+            AddGoals(10, team);
 
             _game.Sets.Should().HaveCount(1);
         }
@@ -69,12 +63,17 @@ namespace Foosball.Domain.Tests
         [Fact]
         public void AddGoal_21Times_ShouldCreate3rdSet()
         {
-            for (int i = 0; i < 21; i++)
-            {
-                _game.AddGoal(Team.TeamA);
-            }
+            AddGoals(21, Team.TeamA);
 
             _game.Sets.Should().HaveCount(3);
+        }
+
+        private void AddGoals(int numberOfGoals, Team team)
+        {
+            for (int i = 0; i < numberOfGoals; i++)
+            {
+                _game.AddGoal(team);
+            }
         }
     }
 }
