@@ -15,6 +15,7 @@ namespace Foosball.Domain
 
         public void AddGoal(Team team)
         {
+            Sets.Add(new Set());
         }
     }
 
