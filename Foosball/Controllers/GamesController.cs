@@ -23,23 +23,23 @@ namespace Foosball.Controllers
         }
 
         [HttpGet("{id}")]
-        public Task<Game> Get(int id, CancellationToken cancellationToken)
+        public Task<Game> GetByIdAsync(int id, CancellationToken cancellationToken)
         {
             return _gameRepository.FindByIdAsync(id, cancellationToken);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(CancellationToken cancellationToken)
+        public async Task<IActionResult> CreateGameAsync(CancellationToken cancellationToken)
         {
             Game game = Game.Create();
 
             await _gameRepository.SaveAsync(game, cancellationToken);
 
-            return CreatedAtAction(nameof(Get), new {id = game.GameId}, game);
+            return CreatedAtAction(nameof(GetByIdAsync), new {id = game.GameId}, game);
         }
 
         [HttpPost("{id}/goal/{team}")]
-        public async Task<IActionResult> Post(int id, Team team, CancellationToken cancellationToken)
+        public async Task<IActionResult> AddGoalToGameAsync(int id, Team team, CancellationToken cancellationToken)
         {
             Game game = await _gameRepository.FindByIdAsync(id, cancellationToken);
             if (game == null)
