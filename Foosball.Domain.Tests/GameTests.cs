@@ -84,6 +84,18 @@ namespace Foosball.Domain.Tests
             _game.Sets.Should().HaveCount(1);
         }
 
+        [Theory]
+        [InlineData(10, 0, Team.TeamA)]
+        [InlineData(10, 9, Team.TeamA)]
+        [InlineData(0, 10, Team.TeamB)]
+        [InlineData(9, 10, Team.TeamB)]
+        public void AddGoal_OneTeamScores10Goals_ScoringTeamShouldWin1stSet(int goalsA, int goalsB, Team expectedWinningTeam)
+        {
+            AddGoals(goalsA, Team.TeamA);
+            AddGoals(goalsB, Team.TeamB);
+
+            _game.Sets[0].WonByTeam.Should().Be(expectedWinningTeam);
+        }
 
         private void AddGoals(int numberOfGoals, Team team)
         {
