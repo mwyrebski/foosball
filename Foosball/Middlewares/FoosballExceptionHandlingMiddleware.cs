@@ -29,7 +29,7 @@ namespace Foosball.Middlewares
 
         private async Task HandleFoosballExceptionAsync(HttpContext context, FoosballException exception)
         {
-            var errorMessage = exception.ToString();
+            var errorMessage = exception.Message;
 
             if (exception is FoosballInvalidDataException)
             {
@@ -49,10 +49,9 @@ namespace Foosball.Middlewares
                 return;
             }
 
-            var body = JsonConvert.SerializeObject(new { error = errorMessage });
+            var body = JsonConvert.SerializeObject(new {error = errorMessage});
             context.Response.Clear();
             context.Response.StatusCode = statusCode;
-            //context.Response.ContentType = MediaTypeNames.Text.
             await context.Response.WriteAsync(body);
         }
     }
