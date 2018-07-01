@@ -28,6 +28,21 @@ namespace Foosball.Domain
 
             currentSet.Goals.Add(new Goal(team));
         }
+
+        public Team? WonByTeam
+        {
+            get
+            {
+                int setsWonByA = Sets.Count(set => set.WonByTeam == Team.TeamA);
+                int setsWonByB = Sets.Count(set => set.WonByTeam == Team.TeamB);
+
+                if (setsWonByA == 2)
+                    return Team.TeamA;
+                if (setsWonByB == 2)
+                    return Team.TeamB;
+                return null;
+            }
+        }
     }
 
     public enum Team
