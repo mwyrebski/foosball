@@ -50,6 +50,12 @@ namespace Foosball
                 app.UseDeveloperExceptionPage();
             }
 
+            using (IServiceScope scope = app.ApplicationServices.CreateScope())
+            {
+                scope.ServiceProvider.GetRequiredService<FoosballDbContext>()
+                    .Database.Migrate();
+            }
+
             app.UseMiddleware<FoosballExceptionHandlingMiddleware>();
 
             app.UseMvc();
