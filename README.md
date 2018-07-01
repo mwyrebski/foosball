@@ -12,7 +12,7 @@ Domain of this application contains three major types:
 ```
     +------+      0..3 +-----+     0..10 +--------+
     | Game | --------> | Set | --------> | Goal   |
-	|      |           |     |           | - Team |
+    |      |           |     |           | - Team |
     +------+           +-----+           +--------+
 ```
 
@@ -32,3 +32,11 @@ Foosball web service uses Sqlite as a persistence mechanism.
 
 The connection string can be configured in the `appsettings.json` file.
 By default data will be stored in `Foosball.db`.
+
+## Running
+
+Foosball requires .NET Core v2.1. To start the service run:
+
+```
+dotnet run -p Foosball
+```
