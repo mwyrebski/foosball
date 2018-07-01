@@ -25,7 +25,10 @@ namespace Foosball.Infrastructure.Persistence
 
         public void Save(Game game)
         {
-            _dbContext.Add(game);
+            if (game.GameId == 0)
+                _dbContext.Add(game);
+            else
+                _dbContext.Update(game);
             _dbContext.SaveChanges();
         }
     }
