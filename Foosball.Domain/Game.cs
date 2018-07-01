@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Foosball.Domain
@@ -16,8 +17,19 @@ namespace Foosball.Domain
 
         public void AddGoal(Team team)
         {
-            if (_goals == 0 || _goals == 10 || _goals == 20)
+            if (!Sets.Any())
                 Sets.Add(new Set());
+
+            Set currentSet = Sets.Last();
+            int goalsA = currentSet.Goals.Count(goal => goal.Team == Team.TeamA);
+            int goalsB = currentSet.Goals.Count(goal => goal.Team == Team.TeamB);
+            if (goalsA == 10 || goalsB == 10)
+            {
+                currentSet = new Set();
+                Sets.Add(currentSet);
+            }
+
+            currentSet.Goals.Add(new Goal(team));
 
             _goals++;
         }
@@ -31,5 +43,16 @@ namespace Foosball.Domain
 
     public class Set
     {
+        public IList<Goal> Goals { get; set; } = new List<Goal>();
+    }
+
+    public class Goal
+    {
+        public Team Team { get; set; }
+
+        public Goal(Team team)
+        {
+            Team = team;
+        }
     }
 }
