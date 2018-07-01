@@ -160,6 +160,15 @@ namespace Foosball.Domain.Tests
             _game.WonByTeam.Should().Be(expectedGameWinningTeam);
         }
 
+        [Fact]
+        public void AddGoal_WhenOneTeamWinsTwoSets_GameShouldHaveFinishedStatus()
+        {
+            AddGoals(10, Team.TeamA);
+            AddGoals(10, Team.TeamA);
+
+            _game.Status.Should().Be(GameStatus.Finished);
+        }
+
         private void AddGoals(int numberOfGoals, Team team)
         {
             for (int i = 0; i < numberOfGoals; i++)
