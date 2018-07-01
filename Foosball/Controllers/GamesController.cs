@@ -37,13 +37,16 @@ namespace Foosball.Controllers
         }
 
         [HttpPost("{id}/goal/{team}")]
-        public void Post(int id, Team team)
+        public IActionResult Post(int id, Team team)
         {
             Game game = _gameRepository.FindById(id);
+            if (game == null)
+                return NotFound();
 
             game.AddGoal(team);
 
             _gameRepository.Save(game);
+            return Ok(game);
         }
     }
 }
