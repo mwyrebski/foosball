@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using FluentAssertions;
 using Xunit;
 
@@ -12,6 +13,14 @@ namespace Foosball.Domain.Tests
             var game = Game.Create();
 
             game.Should().NotBeNull();
+        }
+
+        [Fact]
+        public void Create_ShouldCreateGameWithEmptySets()
+        {
+            var game = Game.Create();
+
+            game.Sets.Should().BeEmpty();
         }
     }
 }
