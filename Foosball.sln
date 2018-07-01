@@ -3,11 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2035
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foosball", "Foosball\Foosball.csproj", "{E4C152D2-E86B-4052-9028-1F64F1731BF5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Foosball", "Foosball\Foosball.csproj", "{E4C152D2-E86B-4052-9028-1F64F1731BF5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foosball.Domain", "Foosball.Domain\Foosball.Domain.csproj", "{A0E9611C-8BEC-47BC-904B-F084323B1F29}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Foosball.Domain", "Foosball.Domain\Foosball.Domain.csproj", "{A0E9611C-8BEC-47BC-904B-F084323B1F29}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foosball.Domain.Tests", "Foosball.Domain.Tests\Foosball.Domain.Tests.csproj", "{5EC41769-1C8F-4A6F-B69D-62F3EEE52D58}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Foosball.Domain.Tests", "Foosball.Domain.Tests\Foosball.Domain.Tests.csproj", "{5EC41769-1C8F-4A6F-B69D-62F3EEE52D58}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D03E0809-4466-4732-8825-2C714DC1EDBF}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
