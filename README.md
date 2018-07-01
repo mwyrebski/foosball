@@ -40,3 +40,7 @@ Foosball requires .NET Core v2.1. To start the service run:
 ```
 dotnet run -p Foosball
 ```
+
+## License
+
+Foosball is licensed under MIT. See [LICENSE](LICENSE) for more information.
