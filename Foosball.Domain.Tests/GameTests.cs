@@ -116,6 +116,17 @@ namespace Foosball.Domain.Tests
             _game.Sets[1].WonByTeam.Should().Be(expectedWinningTeamOf2NdSet);
         }
 
+        [Theory]
+        [InlineData(Team.TeamA)]
+        [InlineData(Team.TeamB)]
+        public void AddGoal_WhenOneTeamWinsFirstTwoSets_GameShouldBeWonByScoringTeam(Team winningTeam)
+        {
+            AddGoals(10, winningTeam);
+            AddGoals(10, winningTeam);
+
+            _game.WonByTeam.Should().Be(winningTeam);
+        }
+
         private void AddGoals(int numberOfGoals, Team team)
         {
             for (int i = 0; i < numberOfGoals; i++)
