@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using FluentAssertions;
 using Xunit;
 
@@ -125,6 +126,23 @@ namespace Foosball.Domain.Tests
             AddGoals(10, winningTeam);
 
             _game.WonByTeam.Should().Be(winningTeam);
+        }
+
+        [Theory]
+        [InlineData(Team.TeamA, Team.TeamB, Team.TeamA)]
+        [InlineData(Team.TeamB, Team.TeamA, Team.TeamB)]
+        [InlineData(Team.TeamA, Team.TeamB, Team.TeamB)]
+        [InlineData(Team.TeamB, Team.TeamA, Team.TeamA)]
+        public void AddGoal_WhenOneTeamWinsAnyOfTwoSets_GameShouldBeWonByScoringTeam(
+            Team teamWinningSet1, Team teamWinningSet2, Team teamWinningSet3)
+        {
+            Team expectedGameWinningTeam = new[] {teamWinningSet1, teamWinningSet2, teamWinningSet3}
+                .ToLookup(x => x).First(x => x.Count() == 2).Key;
+            AddGoals(10, teamWinningSet1);
+            AddGoals(10, teamWinningSet2);
+            AddGoals(10, teamWinningSet3);
+
+            _game.WonByTeam.Should().Be(expectedGameWinningTeam);
         }
 
         private void AddGoals(int numberOfGoals, Team team)
